@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Shantell+Sans&display=swap");
+:root {
+  --grid-cols: 1;
+  --grid-rows: 1;
+  --primary-dark: #333;
+  --primary-light: #ededed;
+  --secondary-color: #fefefe;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  color: var(--primary-dark);
+  background-color: var(--primary-light);
+  line-height: 1.6;
+}
+.title {
+  text-align: center;
+  text-shadow: 0px 1px 6px rgba(0, 0, 0, 0.49);
+  font-size: 80px;
+}
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+.settings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 200px;
+}
+button {
+  font-size: 16px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-dark);
+  cursor: pointer;
+}
+button:hover,
+input[type="color"]:hover {
+  transform: scale(1.05);
+}
+button,
+input[type="color"] {
+  transition: transform 0.1s ease-in-out;
+}
+.color-mode {
+  background-color: var(--primary-dark);
+  color: var(--secondary-color);
+}
+.container {
+  display: grid;
+  width: 500px;
+  height: 500px;
+  justify-content: center;
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+}
+.grid-item {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+input[type="color"] {
+  border: none;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.size-value {
+  margin-bottom: -20px;
+  font-size: 18px;
+}
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  border: 1px solid var(--primary-dark);
+  height: 10px;
+  border-radius: 25px;
+  background-color: var(--primary-light);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  background-color: var(--primary-dark);
+  border-radius: 25px;
+  margin-top: -8px;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}

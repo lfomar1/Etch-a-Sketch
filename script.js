@@ -1,10 +1,11 @@
+"use strict";
 const PRIMARYDARK = "#333333";
 const PRIMARYCOLOR = "#ededed";
 const SECONDARYCOLOR = "#fefefe";
 const DEFAULTMODE = "color";
 const DEFAULTSIZE = 16;
 
-let defaultColor = PRIMARYCOLOR;
+let defaultColor = PRIMARYDARK;
 let currentSize = DEFAULTSIZE;
 let currentMode = DEFAULTMODE;
 
@@ -19,6 +20,13 @@ const grid = document.querySelector(".grid-item");
 
 let mouseDown = false;
 
+// This changes the primary color
+function colorPick(e) {
+  const selectedColor = e.target.value;
+  defaultColor = selectedColor;
+}
+colorPicker.addEventListener("input", colorPick);
+
 function makeRows(rows, cols) {
   container.style.setProperty("--grid-rows", rows);
   container.style.setProperty("--grid-cols", cols);
@@ -29,19 +37,27 @@ function makeRows(rows, cols) {
     let grid = Array.from(document.getElementsByClassName("grid-item"));
     grid.forEach((grid) => {
       function changeColor() {
-        grid.style.backgroundColor = "green";
+        grid.style.backgroundColor = defaultColor;
       }
-      grid.addEventListener("click", changeColor);
-      grid.addEventListener("mousedown", changeColor);
+      grid.addEventListener("mousedown", function () {
+        mouseDown = true;
+        changeColor();
+      });
+      grid.addEventListener("mouseover", function () {
+        if (mouseDown) {
+          changeColor();
+          console.log(mouseDown);
+        }
+      });
+      grid.addEventListener("mouseup", function () {
+        mouseDown = false;
+      });
     });
   }
 }
 makeRows(16, 16);
-/* grid.onmouseover = (mouseDown) => {
-        grid.onmousedown = () => {
-          mouseDown = true;
-          grid.style.backgroundColor = "green";
-        };
-      };
-    });
-  } */
+
+function rainbow() {
+  const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  return randomColor;
+}

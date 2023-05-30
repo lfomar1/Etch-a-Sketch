@@ -51,7 +51,7 @@ input[type="color"] {
   background-color: var(--primary-dark);
   color: var(--secondary-color);
 }
-.container {
+#container {
   display: grid;
   width: 500px;
   height: 500px;

@@ -102,38 +102,48 @@ function clearGrid() {
 }
 //This code change the slider value
 sizeSlider.addEventListener("input", sizing);
-function sizing() {
-  const value = Number(sizeSlider.value);
-  sizeValue.textContent = `${value} x ${value}`;
-}
+sizeSlider.addEventListener("input", upadteGrid);
 
+function sizing() {
+  const rows = parseInt(sizeSlider.value);
+  const cols = parseInt(sizeSlider.value);
+  sizeValue.textContent = `${rows} x ${cols}`;
+}
 //This code below makes the rows and cols
 function makeRows(rows, cols) {
   container.style.setProperty("--grid-rows", rows);
   container.style.setProperty("--grid-cols", cols);
-
   for (let i = 0; i < rows * cols; i++) {
     let cell = document.createElement("div");
     container.appendChild(cell).className = "grid-item";
-    let grid = Array.from(document.getElementsByClassName("grid-item"));
-    grid.forEach((grid) => {
-      function changeColor() {
-        grid.style.backgroundColor = defaultColor;
-      }
-      grid.addEventListener("mousedown", function () {
-        mouseDown = true;
-        changeColor();
-      });
-      grid.addEventListener("mouseover", function () {
-        if (mouseDown) {
-          changeColor();
-        }
-      });
-      grid.addEventListener("mouseup", function () {
-        mouseDown = false;
-      });
-    });
   }
 }
+//This code update the rows and cols with slider value
+function upadteGrid() {
+  container.innerHTML = "";
+  const rows = sizeSlider.value;
+  const cols = sizeSlider.value;
+  makeRows(rows, cols);
+}
+
+//Default rows and cols
 makeRows(16, 16);
-//This code clears the grid
+let grid = Array.from(document.getElementsByClassName("grid-item"));
+grid.forEach((grid) => {
+  function normalMode() {
+    grid.style.backgroundColor = defaultColor;
+    defaultColor = PRIMARYDARK;
+  }
+  grid.addEventListener("mousedown", function () {
+    mouseDown = true;
+    normalMode();
+  });
+  grid.addEventListener("mouseover", function () {
+    if (mouseDown) {
+      normalMode();
+    }
+  });
+  grid.addEventListener("mouseup", function () {
+    mouseDown = false;
+  });
+});
